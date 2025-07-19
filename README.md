@@ -1,1 +1,0 @@
-# webpack-prettier-lint-template
