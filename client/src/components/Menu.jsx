@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@mdi/react"
 import {categories} from './data/menuData'
 import './Menu.css'
@@ -6,6 +6,10 @@ import { mdiDotsHorizontalCircleOutline } from '@mdi/js';
 
 const Menu = () => {
     const [selected, setSelected] = useState('Salad') 
+    const [selectedItems, setSelectedItems] = useState([])
+    const cartRef = useRef()
+    const [totalPrice, setTotalPrice] = useState()
+    const [allItems, setAllItems] = useState()
     
     const selectItem = (e) => {
         e.preventDefault()
@@ -16,6 +20,15 @@ const Menu = () => {
         document.querySelector('.selectedCat').classList.remove('selectedCat')
         document.getElementById(selected).classList.add('selectedCat')
     },[selected])
+
+    useEffect(() => {
+    cartRef.current.show();
+
+    const total = selectedItems.reduce((acc, el) => acc + (parseFloat(el.price) * parseInt(el.count)), 0);
+    const all = selectedItems.reduce((acc, el) => acc + parseInt(el.count), 0)
+    setTotalPrice(total.toFixed(2));
+    setAllItems(all)
+}, [selectedItems]);
 
     return(
         <>
@@ -46,15 +59,71 @@ const Menu = () => {
                  />
                     {Object.entries(categories[selected]) 
                     .filter(([key]) => key !== 'icon') 
-                    .map(([itemName, itemData]) => (
-                        <div key={itemName} className="item">
+                    .map(([itemName, itemData]) => {
+                        const existingItem = selectedItems.find(item => item.itemName === itemName);
+                        const count = existingItem ? existingItem.count : 0;
+
+                    return(
+                        <div 
+                        key={itemName} 
+                        className="item" 
+                        onClick={() => {
+                           setSelectedItems(prevItems => {
+                            if (count === 0 ) {
+                                return [...prevItems, { itemName, price: itemData.price, count: 1 }];
+                            }
+
+                            return prevItems
+                        });
+                        }}>
                             <img src={itemData.image} alt={itemName}/>
                             <p>{itemName}</p>
                             <span>{parseFloat(itemData.price).toFixed(2)} €</span>
-                        </div>
-                    ))}
+
+                            <div className="counter-container" style={count === 0 ? {display: 'none'} : {display: "flex"}} onClick={(e) => e.stopPropagation()}>
+                            
+                                <button
+                                className="btn reduce"
+                                onClick={() =>
+                                    setSelectedItems(prevItems => {
+                                    const updated = prevItems.map(item => {
+                                    if (item.itemName === itemName) {
+                                        const newCount = Math.max(item.count - 1, 0);
+                                        return newCount === 0 ? null : { ...item, count: newCount };
+                                    }
+                                return item;
+                                }).filter(Boolean);
+                                return updated;
+                                })
+                                }
+                                >-</button>
+
+          <div className="count-display">{count}</div>
+
+          <button
+            className="btn add"
+            onClick={e =>  {
+                e.preventDefault()
+                e.stopPropagation();
+              setSelectedItems(prevItems => {
+                const existingIndex = prevItems.findIndex(item => item.itemName === itemName);
+                  const updatedItems = [...prevItems];
+                  updatedItems[existingIndex].count++;
+                  return updatedItems;
+              });
+            }}
+          >+</button>
+          </div>
+                        </div>)
+                        })}
                 </div>
             </div>
+            <dialog ref={cartRef}>
+                    <div>
+                        <span className="itemsCart"><b>{allItems}</b> items in cart</span>
+                        <span className="priceCart">Price: <span>{totalPrice} €</span></span>
+                    </div>
+            </dialog>
         </>
     )
 }
