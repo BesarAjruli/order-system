@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "menu",
+    path: "menu/:table",
     element: <Menu />,
   },
 ]);

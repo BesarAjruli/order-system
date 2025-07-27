@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import Icon from "@mdi/react"
 import {categories} from './data/menuData'
 import './Menu.css'
@@ -13,7 +14,17 @@ const Menu = () => {
     const [allItems, setAllItems] = useState()
     const [showSideMenu, setShowSideMenu] = useState(false);
 
-    
+    const validTables = import.meta.env.VITE_VALID_TABLES?.split(',') || [];
+    const { table } = useParams()
+
+    useEffect(() => {
+    if (!validTables.includes(table)) {
+        alert(`Table "${table}" is not valid, your order will not be sent`);
+    } else {
+        console.log(`Table "${table}" is valid`);
+    }
+}, [table]);
+
     const selectItem = (e) => {
         e.preventDefault()
         setSelected(e.currentTarget.id)
@@ -35,8 +46,39 @@ const Menu = () => {
     setAllItems(all)
 }, [selectedItems]);
 
-    const sendOrder = () => {
-        console.log(selectedItems)
+    const sendOrder = async() => {
+        if (!validTables.includes(table)) {
+            alert(`Table "${table}" is not valid, your order will not be sent`);
+        return
+        } else {
+             try {
+    const response = await fetch('http://localhost:3000/api/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', 
+      body: JSON.stringify(selectedItems),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const result = await response.json();
+    console.log('Server response:', result.success);
+    if(result.success === true){
+        alert('Order sent succefully')
+        setAllItems()
+        setSelected('Salad')
+        setSelectedItems([])
+    } else(
+        alert('There was a problem trying to send your order')
+    )
+  } catch (error) {
+    console.error('Error posting order:', error);
+  }
+        }
     }
 
     return(
