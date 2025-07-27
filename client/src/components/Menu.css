@@ -172,3 +172,14 @@ dialog div{
 .btn:hover {
   opacity: 0.85;
 }
+
+.cartIcon{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    width: fit-content;
+    padding: 7px 20px;
+    border-radius: 15px;
+}

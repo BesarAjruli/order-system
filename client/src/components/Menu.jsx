@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import Icon from "@mdi/react"
 import {categories} from './data/menuData'
 import './Menu.css'
-import { mdiDotsHorizontalCircleOutline } from '@mdi/js';
+import { mdiDotsHorizontalCircleOutline, mdiCart } from '@mdi/js';
+import SideMenu from "./SideMenu";
 
 const Menu = () => {
     const [selected, setSelected] = useState('Salad') 
@@ -10,6 +11,8 @@ const Menu = () => {
     const cartRef = useRef()
     const [totalPrice, setTotalPrice] = useState()
     const [allItems, setAllItems] = useState()
+    const [showSideMenu, setShowSideMenu] = useState(false);
+
     
     const selectItem = (e) => {
         e.preventDefault()
@@ -22,7 +25,9 @@ const Menu = () => {
     },[selected])
 
     useEffect(() => {
-    cartRef.current.show();
+        if(selectedItems.length > 0) cartRef.current.show();
+        else cartRef.current.close()
+    
 
     const total = selectedItems.reduce((acc, el) => acc + (parseFloat(el.price) * parseInt(el.count)), 0);
     const all = selectedItems.reduce((acc, el) => acc + parseInt(el.count), 0)
@@ -30,11 +35,19 @@ const Menu = () => {
     setAllItems(all)
 }, [selectedItems]);
 
+    const sendOrder = () => {
+        console.log(selectedItems)
+    }
+
     return(
+        <>
+              {showSideMenu ? (
+            <SideMenu onClose={() => setShowSideMenu(false)} />
+        ) : (
         <>
             <div className="container">
                 <div className="categories">
-                    <div className="more">
+                    <div className="more" onClick={() => setShowSideMenu(true)}>
                         <Icon path={mdiDotsHorizontalCircleOutline} size={0.8}></Icon>
                         <span>MORE</span>
                     </div>
@@ -70,7 +83,7 @@ const Menu = () => {
                         onClick={() => {
                            setSelectedItems(prevItems => {
                             if (count === 0 ) {
-                                return [...prevItems, { itemName, price: itemData.price, count: 1 }];
+                                return [...prevItems, { itemName, price: itemData.price, count: 1, category: selected }];
                             }
 
                             return prevItems
@@ -122,8 +135,17 @@ const Menu = () => {
                     <div>
                         <span className="itemsCart"><b>{allItems}</b> items in cart</span>
                         <span className="priceCart">Price: <span>{totalPrice} €</span></span>
+                        <div className="cartIcon">
+                            <Icon 
+                            path={mdiCart} 
+                            size={1.2}
+                            onClick={sendOrder}
+                            ></Icon>
+                        </div>
                     </div>
-            </dialog>
+            </dialog> 
+            </>
+        )}
         </>
     )
 }

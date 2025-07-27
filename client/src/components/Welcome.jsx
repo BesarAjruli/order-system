@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import './Welcome.css'
 import artwork1 from '../assets/artwork1.png'
-import React, { Component } from 'react';
 import Icon from '@mdi/react';
 import { mdiInstagram, mdiMapMarker, mdiPhone } from '@mdi/js';
 

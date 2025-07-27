@@ -1,0 +1,47 @@
+.sideMenu{
+    background-image: url('https://images.pexels.com/photos/3826431/pexels-photo-3826431.jpeg');
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    padding-top: 40px;
+}
+
+.close{
+    margin-top: 0;
+    margin-left: 20px;
+}
+
+.navigations{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    gap: 30px;
+    padding: 50px 0;
+}
+
+.navigations a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#socialCont{
+    justify-content: center;
+    place-items: center;
+}
+
+.contactCont{
+    position: absolute;
+    bottom: 50px;
+    left: 25%;
+}
+
+.logoSideMenu{
+    border-radius: 100%;
+    position: absolute;
+    width: 70px;
+    right: 20px;
+    top: 30px;
+}
