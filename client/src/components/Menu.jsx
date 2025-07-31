@@ -58,7 +58,7 @@ const Menu = () => {
         'Content-Type': 'application/json',
       },
       credentials: 'include', 
-      body: JSON.stringify(selectedItems),
+      body: JSON.stringify({table, items: selectedItems, totalPrice}),
     });
 
     if (!response.ok) {
