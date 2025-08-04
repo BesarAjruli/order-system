@@ -1,0 +1,116 @@
+.order-card {
+  width: 320px;
+  height: 354px;
+  overflow: scroll;
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 15px 30px;
+    border-radius: 15px;
+}
+
+.actionButtonCont{
+    display: flex;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.actionButtons {
+  all: unset;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.3em 0.9em;
+  border: mediumspringgreen solid 0.15em;
+  border-radius: 0.25em;
+  color: mediumspringgreen;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+}
+
+.remove{
+    border-color: red;
+    color: red;
+}
+
+.served{
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.ordered{
+  border-color: #9e9e9e;
+  color: #9e9e9e;
+}
+
+.actionButtons p {
+  z-index: 1;
+}
+
+.actionButtons:hover {
+  color: #212121;
+}
+
+.actionButtons:active {
+  border-color: teal;
+}
+
+.remove:active{
+    border-color: red;
+}
+.served:active{
+    border-color: #3498db;
+}
+.ordered:active{
+  border-color: #9e9e9e;
+}
+
+.actionButtons::after, .actionButtons::before {
+  content: "";
+  position: absolute;
+  width: 9em;
+  aspect-ratio: 1;
+  background: mediumspringgreen;
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+
+.remove::after, .remove::before{
+  background: red;
+}
+
+.served::after, .served::before{
+    background: #3498db;
+}
+
+.ordered::after, .ordered::before{
+  background: #9e9e9e;
+}
+
+.actionButtons::before {
+  left: 0;
+  transform: translateX(-8em);
+}
+
+.actionButtons::after {
+  right: 0;
+  transform: translateX(8em);
+}
+
+.actionButtons:hover:before {
+  transform: translateX(-1em);
+}
+
+.actionButtons:hover:after {
+  transform: translateX(1em);
+}
+
+.actionButtons:active:before,
+.actionButtons:active:after {
+  background: teal;
+}

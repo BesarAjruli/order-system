@@ -19,6 +19,7 @@ model Order {
   createdAt DateTime @default(now())
   totalPrice Float
   items OrderItems[]
+  status String @default("Ordered")
 }
 
 model OrderItems {
@@ -28,5 +29,5 @@ model OrderItems {
   count Int
   category String
   orderId Int
-  order Order @relation(fields: [orderId], references: [id])
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }

@@ -183,3 +183,15 @@ dialog div{
     padding: 7px 20px;
     border-radius: 15px;
 }
+
+.ringWaiter{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #D4AF37;
+    font-weight: 400;
+    text-transform: uppercase;
+}

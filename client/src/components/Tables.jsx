@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import './Tables.css'
+import Order from './Order'
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3000");
 
 const Tables = () => {
     const [orders, setOrders] = useState([])
-
+    const [groupedOrders, setGroupedOrders] = useState([])
 
     useEffect(() => {
            const sendOrder = async() => {
@@ -22,24 +26,49 @@ const Tables = () => {
     }
 
     sendOrder()
+
+    socket.on("waiterCalled", (table) => {
+      document.getElementById(`table${table}`).style.borderColor = 'red'
+    });
+
+    return () => socket.off("waiterCalled");
     }, [])
 
-    const groupedByTable = orders.reduce((acc, order) => {
-    if (!acc[order.table]) acc[order.table] = []
-    acc[order.table].push(order)
-    return acc
-  }, {})
+    useEffect(() => {
+      orders.map(order => {
+        if(order.status !== 'Paid'){
+          const tableCont = document.getElementById(`table${order.table}`)
+          tableCont.style.borderColor = 'yellow'
+      }
+      })
+    }, [orders])
 
-
+    const tableOrders = (table) => {
+      document.getElementById(`table${table}`).style.borderColor = '#b6b6b6'
+      const grOrder = orders.filter(order =>
+         parseInt(order.table) === parseInt(table)
+        )
+      setGroupedOrders(grOrder)
+    }
     return(
         <>
-             <div className="orders-container">
-      {Object.entries(groupedByTable).map(([table, tableOrders]) => (
-        <div key={table} className="table-orders">
-          <h2>Table {table}</h2>
+          {groupedOrders.length === 0 ? 
+                  <div className="orders-container">
+      {Array.from({ length: 10 }, (_, i) => (
+      <div 
+      key={i+1} 
+      className="table-orders" 
+      id={`table${i+1}`}
+      onClick={() => tableOrders(i+1)}
+      >
+          <h2>Table {i+1}</h2>
         </div>
       ))}
     </div>
+    : <div className='ordersCont'>
+      <Order data={groupedOrders}/>
+    </div>}
+     
         </>
     )
 }

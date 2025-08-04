@@ -4,6 +4,7 @@
     justify-content: center;
     place-items: center;
     padding: 30px 50px;
+    gap: 35px;
 }
 .table-orders{
     width: 150px;
@@ -11,7 +12,8 @@
     background-image: url('https://img.freepik.com/premium-photo/overhead-view-dining-set-with-wooden-table-beige-chairs-round-table-isolated-white-background-cut-out-furniture-top-view-flat-lay-floor-plan-elements-3d-rendering_429124-8405.jpg');
     background-position: center;
     background-size: cover;
-    border: 1px solid #b6b6b6;
+    border: 1px solid;
+    border-color: #b6b6b6;
     border-radius: 15px;
     display: flex;
     justify-content: center;

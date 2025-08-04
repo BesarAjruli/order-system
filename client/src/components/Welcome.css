@@ -28,7 +28,7 @@
     width: 200px;
     color: #fff;
     text-align: center;
-    margin-top: 220px;
+    margin-top: 120px;
 }
 .textCont h1{
     line-height: 45px;
@@ -42,7 +42,7 @@
   --color-background: #D4AF37;
   --color-outline: #ff145b80;
   --color-shadow: #00000080;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .btn-content {

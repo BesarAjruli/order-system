@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './Welcome.css'
 import artwork1 from '../assets/artwork1.png'
 import Icon from '@mdi/react';
@@ -7,6 +7,8 @@ import { mdiInstagram, mdiMapMarker, mdiPhone } from '@mdi/js';
 const Welcome = () => {
 
     const navigate = useNavigate()
+    const params = useParams()
+
 
     return(
         <div className="bg-wrapper">
@@ -18,7 +20,7 @@ const Welcome = () => {
                 <span>Coffee & Restaurant</span>
             </div>
 
-<div class="btn-conteiner" onClick={() => navigate('/menu')}>
+<div class="btn-conteiner" onClick={() => navigate(`/menu/${params.table}`)}>
   <a class="btn-content" href="#">
     <span class="btn-title">See the menu</span>
     <span class="icon-arrow">
