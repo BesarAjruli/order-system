@@ -4,29 +4,7 @@ import Tables from './Tables'
 import Order from './Order'
 
 const Orders = () => {
-    const [orders, setOrders] = useState([])
     const [selectedNav, setSelectedNav] = useState('orders')
-
-   
-
-    useEffect(() => {
-           const sendOrder = async() => {
-             try {
-    const response = await fetch('http://localhost:3000/api/order');
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const result = await response.json();
-    setOrders(result)
-  } catch (error) {
-    console.error('Error posting order:', error);
-  }
-    }
-
-    sendOrder()
-    }, [])
 
     const onBell = (event) => {
       const { message, table } = event.detail;
@@ -35,9 +13,7 @@ const Orders = () => {
 
       window.addEventListener("bell-signal", onBell);
     return () => window.removeEventListener("bell-signal", onBell);
-    };
-
-    
+    }; 
 
      const triggerFunction = (msg, table) => {
     alert(`Triggered with: ${msg} (Table: ${table})`);

@@ -31,7 +31,14 @@ const Tables = () => {
       document.getElementById(`table${table}`).style.borderColor = 'red'
     });
 
-    return () => socket.off("waiterCalled");
+    socket.on("Orders", (data) => {
+      sendOrder()
+    });
+
+    return () => {
+      socket.off("waiterCalled")
+      socket.off("Orders")
+    };
     }, [])
 
     useEffect(() => {
@@ -50,6 +57,7 @@ const Tables = () => {
         )
       setGroupedOrders(grOrder)
     }
+
     return(
         <>
           {groupedOrders.length === 0 ? 

@@ -6,6 +6,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { EventEmitter } from "events";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,12 +21,7 @@ const io = new Server(server, {
   },
 });
 
-import { EventEmitter } from "events";
-const waiterCalled = new EventEmitter();
 
-waiterCalled.on('called', (table) => {
-  io.emit('waiterCalled', table)
-})
 
 app.use(
   cors({
@@ -69,6 +65,12 @@ app.get("/api/order", async (req, res) => {
   res.json(sortedOrders);
 });
 
+const newOrders = new EventEmitter()
+
+newOrders.on('ordered', (data) => {
+  io.emit('Orders', data)
+})
+
 app.post("/api/order", async (req, res) => {
   try {
     const { table, items, totalPrice } = req.body;
@@ -95,6 +97,7 @@ app.post("/api/order", async (req, res) => {
       include: { items: true },
     });
 
+    newOrders.emit('ordered', newOrder)
     res.json({ success: true, order: newOrder });
   } catch (err) {
     console.error(err);
@@ -151,6 +154,12 @@ app.put("/api/orderPaid/:id", async (req, res) => {
 
   res.json(updatedOrder);
 });
+
+const waiterCalled = new EventEmitter();
+
+waiterCalled.on('called', (table) => {
+  io.emit('waiterCalled', table)
+})
 
 app.post('/api/callWaiter', (req, res) => {
   const table = req.body.table
