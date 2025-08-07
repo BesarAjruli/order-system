@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Order.css";
 import io from "socket.io-client";
 
@@ -7,6 +7,9 @@ const socket = io("http://localhost:3000");
 const Order = ({ data }) => {
   const [orders, setOrders] = useState([]);
   const [searchedOrders, setSearchedOrders] = useState([]);
+  const passDialogRef = useRef();
+  const password = import.meta.env.VITE_PASSWORD;
+
 
   useEffect(() => {
     const sendOrder = async () => {
@@ -25,6 +28,15 @@ const Order = ({ data }) => {
     };
 
     sendOrder();
+
+    if (
+      localStorage.getItem("logged") &&
+      localStorage.getItem("logged") === 'true'
+    ) {
+      passDialogRef.current.close();
+    } else {
+      passDialogRef.current.showModal();
+    }
 
     socket.on("Orders", (data) => {
       sendOrder();
@@ -141,8 +153,66 @@ const Order = ({ data }) => {
     setSearchedOrders(searchedOrders);
   };
 
+  
+  const submitPassword = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    for (const [key, value] of formData) {
+      if(value === password){
+        localStorage.setItem('logged', true)
+        passDialogRef.current.style.border = '0'
+        passDialogRef.current.close()
+      } else{
+        passDialogRef.current.style.border = '1px solid red'
+      }
+    }
+  };
+
+  const handleKeyDown = (e) => {
+  if (e.key === 'Escape') {
+    e.stopPropagation();
+    e.preventDefault(); 
+  }
+};
+
+
   return (
     <>
+      <dialog ref={passDialogRef} className="passwordDialog" onKeyDown={handleKeyDown}>
+        <form className="passDialog" onSubmit={(e) => submitPassword(e)}>
+          <h2>Enter password to access orders!</h2>
+          <div className="group">
+            <svg
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon"
+            >
+              <path
+                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              ></path>
+            </svg>
+            <input
+              className="inputPass"
+              type="password"
+              placeholder="password"
+              name="password"
+            />
+          </div>
+          <button className="submiPass" type="submit">
+            <span className="circle1"></span>
+            <span className="circle2"></span>
+            <span className="circle3"></span>
+            <span className="circle4"></span>
+            <span className="circle5"></span>
+            <span className="text">Submit</span>
+          </button>
+        </form>
+      </dialog>
       <form className="form">
         <button>
           <svg

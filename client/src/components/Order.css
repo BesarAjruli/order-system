@@ -1,4 +1,3 @@
-
 .order-card {
   width: 320px;
   height: 354px;
@@ -6,14 +5,14 @@
   background: rgb(236, 236, 236);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    padding: 15px 30px;
-    border-radius: 15px;
+  padding: 15px 30px;
+  border-radius: 15px;
 }
 
-.actionButtonCont{
-    display: flex;
-    gap: 15px;
-    margin-top: 50px;
+.actionButtonCont {
+  display: flex;
+  gap: 15px;
+  margin-top: 50px;
 }
 
 .actionButtons {
@@ -33,17 +32,17 @@
   user-select: none;
 }
 
-.remove{
-    border-color: red;
-    color: red;
+.remove {
+  border-color: red;
+  color: red;
 }
 
-.served{
-    border-color: #3498db;
-    color: #3498db;
+.served {
+  border-color: #3498db;
+  color: #3498db;
 }
 
-.ordered{
+.ordered {
   border-color: #9e9e9e;
   color: #9e9e9e;
 }
@@ -60,17 +59,18 @@
   border-color: teal;
 }
 
-.remove:active{
-    border-color: red;
+.remove:active {
+  border-color: red;
 }
-.served:active{
-    border-color: #3498db;
+.served:active {
+  border-color: #3498db;
 }
-.ordered:active{
+.ordered:active {
   border-color: #9e9e9e;
 }
 
-.actionButtons::after, .actionButtons::before {
+.actionButtons::after,
+.actionButtons::before {
   content: "";
   position: absolute;
   width: 9em;
@@ -81,15 +81,18 @@
   transition: transform 500ms, background 300ms;
 }
 
-.remove::after, .remove::before{
+.remove::after,
+.remove::before {
   background: red;
 }
 
-.served::after, .served::before{
-    background: #3498db;
+.served::after,
+.served::before {
+  background: #3498db;
 }
 
-.ordered::after, .ordered::before{
+.ordered::after,
+.ordered::before {
   background: #9e9e9e;
 }
 
@@ -139,7 +142,7 @@
   padding-inline: 0.8em;
   border-radius: var(--border-radius);
   transition: border-radius 0.5s ease;
-  background: var(--input-bg,#e4e4e4);
+  background: var(--input-bg, #e4e4e4);
 }
 /* styling of Input */
 .input {
@@ -194,4 +197,121 @@ input:not(:placeholder-shown) ~ .reset {
 .form svg {
   width: 17px;
   margin-top: 3px;
+}
+
+.group {
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  max-width: 200px;
+}
+
+.inputPass {
+  width: 100%;
+  height: 45px;
+  line-height: 30px;
+  padding: 0 5rem;
+  padding-left: 3rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background-color: #e2eaf1;
+  color: #0d0c22;
+  transition: 0.5s ease;
+}
+
+.inputPass::placeholder {
+  color: #94a3b8;
+}
+
+.inputPass:focus,
+.inputpass:hover {
+  outline: none;
+  border-color: rgba(129, 140, 248);
+  background-color: #fff;
+  box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+}
+
+.icon {
+  position: absolute;
+  left: -3rem;
+  top: 1rem;
+  fill: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+.passDialog{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  margin: 20px 0;
+}
+.passDialog h2{
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.submiPass {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: #171717;
+  padding: 1em 2em;
+  border: none;
+  border-radius: .6rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.submiPass span:not(:nth-child(6)) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 30px;
+  width: 30px;
+  background-color: #0c66ed;
+  border-radius: 50%;
+  transition: .6s ease;
+}
+
+.submiPass span:nth-child(6) {
+  position: relative;
+}
+
+.submiPass span:nth-child(1) {
+  transform: translate(-3.3em, -4em);
+}
+
+.submiPass span:nth-child(2) {
+  transform: translate(-6em, 1.3em);
+}
+
+.submiPass span:nth-child(3) {
+  transform: translate(-.2em, 1.8em);
+}
+
+.submiPass span:nth-child(4) {
+  transform: translate(3.5em, 1.4em);
+}
+
+.submiPass span:nth-child(5) {
+  transform: translate(3.5em, -3.8em);
+}
+
+.submiPass:hover span:not(:nth-child(6)) {
+  transform: translate(-50%, -50%) scale(4);
+  transition: 1.5s ease;
+}
+
+.passwordDialog{
+  width: 80%;
 }
