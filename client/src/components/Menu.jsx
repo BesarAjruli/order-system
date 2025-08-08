@@ -14,6 +14,8 @@ const Menu = () => {
   const [allItems, setAllItems] = useState();
   const [showSideMenu, setShowSideMenu] = useState(false);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+
   const validTables = import.meta.env.VITE_VALID_TABLES?.split(",") || [];
   const { table } = useParams();
 
@@ -54,7 +56,7 @@ const Menu = () => {
       return;
     } else {
       try {
-        const response = await fetch("http://localhost:3000/api/order", {
+        const response = await fetch((backendUrl ? backendUrl : "http://localhost:3000") + "/api/order", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +87,7 @@ const Menu = () => {
       alert(`Table "${table}" is not valid, your order will not be sent`);
       return;
     } else {
-      const response = await fetch("http://localhost:3000/api/callWaiter", {
+      const response = await fetch(backendUrl ? backendUrl : "http://localhost:3000" + "/api/callWaiter", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

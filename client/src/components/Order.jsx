@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import "./Order.css";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3000");
+const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+const socket = io(backendUrl ? backendUrl : 'http://localhost:3000');
 
 const Order = ({ data }) => {
   const [orders, setOrders] = useState([]);
@@ -14,7 +16,7 @@ const Order = ({ data }) => {
   useEffect(() => {
     const sendOrder = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/order");
+        const response = await fetch( (backendUrl ? backendUrl : "http://localhost:3000") + '/api/order');
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -48,7 +50,7 @@ const Order = ({ data }) => {
   const orderServed = async (id, status) => {
     try {
       const request = await fetch(
-        `http://localhost:3000/api/${
+        (backendUrl ? backendUrl : "http://localhost:3000") + `/api/${
           status !== "Served" ? "updateServed" : "updateOrder"
         }/${id}`,
         {
@@ -86,7 +88,7 @@ const Order = ({ data }) => {
   const deleteOrder = async (id) => {
     try {
       const request = await fetch(
-        `http://localhost:3000/api/deleteOrder/${id}`,
+        (backendUrl ? backendUrl : "http://localhost:3000") + `api/deleteOrder/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -115,7 +117,7 @@ const Order = ({ data }) => {
 
   const orderPaid = async (id, status) => {
     try {
-      const request = await fetch(`http://localhost:3000/api/orderPaid/${id}`, {
+      const request = await fetch( (backendUrl ? backendUrl : "http://localhost:3000") + `/api/orderPaid/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
