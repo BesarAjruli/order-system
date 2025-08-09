@@ -88,7 +88,7 @@ const Order = ({ data }) => {
   const deleteOrder = async (id) => {
     try {
       const request = await fetch(
-        (backendUrl ? backendUrl : "http://localhost:3000") + `api/deleteOrder/${id}`,
+        (backendUrl ? backendUrl : "http://localhost:3000") + `/api/deleteOrder/${id}`,
         {
           method: "DELETE",
           headers: {

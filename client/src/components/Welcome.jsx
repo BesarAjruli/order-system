@@ -8,7 +8,6 @@ const Welcome = () => {
 
     const navigate = useNavigate()
     const params = useParams()
-  console.log('test')
 
     return(
         <div className="bg-wrapper">
