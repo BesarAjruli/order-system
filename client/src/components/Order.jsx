@@ -24,6 +24,7 @@ const Order = ({ data }) => {
 
         const result = await response.json();
         setOrders(result);
+        console.log(result)
       } catch (error) {
         console.error("Error posting order:", error);
       }
@@ -282,7 +283,7 @@ const Order = ({ data }) => {
           <ul>
             {order.items.map((item) => (
               <li key={item.id}>
-                {item.itemName} x {item.count} – ${item.price.toFixed(2)}
+                {item.itemName} {item.category} x {item.count} – ${item.price.toFixed(2)}
               </li>
             ))}
           </ul>
