@@ -4,7 +4,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import Menu from './components/Menu.jsx'
 import Orders from './components/Orders.jsx'
+import Gallery from './components/Gallery.jsx'
 import './App.css'
+import './index.css'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
     path: '/orders',
     element: <Orders />
   },
+  {
+    path: '/gallery',
+    element: <Gallery/>
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
