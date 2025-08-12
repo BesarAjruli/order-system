@@ -87,7 +87,7 @@ const Menu = () => {
       alert(`Table "${table}" is not valid, your order will not be sent`);
       return;
     } else {
-      const response = await fetch(backendUrl ? backendUrl : "http://localhost:3000" + "/api/callWaiter", {
+      const response = await fetch((backendUrl ? backendUrl : "http://localhost:3000") + "/api/callWaiter", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
