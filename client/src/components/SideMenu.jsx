@@ -24,7 +24,7 @@ const SideMenu = ({ onClose }) => {
                     <Link to='/'>Home</Link>
                     <Link to='/menu'>Menu</Link>
                     <Link to='/gallery'>Gallery</Link>
-                    <Link to=''>About Us</Link>
+                    <Link to='/about'>About Us</Link>
                 </div>
 
                 <div className='contactCont'>

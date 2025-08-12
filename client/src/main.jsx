@@ -5,6 +5,7 @@ import App from './App.jsx'
 import Menu from './components/Menu.jsx'
 import Orders from './components/Orders.jsx'
 import Gallery from './components/Gallery.jsx'
+import AboutUs from './components/AboutUs.jsx'
 import './App.css'
 import './index.css'
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/gallery',
     element: <Gallery/>
+  },
+  {
+    path: '/about',
+    element: <AboutUs/>
   }
 ]);
 
