@@ -1,4 +1,4 @@
-import { mdiClose, mdiInstagram, mdiMapMarker, mdiPhone } from '@mdi/js'
+import { mdiClose, mdiFacebook, mdiMapMarker, mdiPhone } from '@mdi/js'
 import Icon from '@mdi/react'
 import './SideMenu.css'
 import { Link } from 'react-router-dom'
@@ -30,7 +30,7 @@ const SideMenu = ({ onClose }) => {
                 <div className='contactCont'>
                 <span>CONTACT US</span>
                 <div id="socialCont">
-                    <div><Icon path={mdiInstagram} size={1.3}></Icon></div>
+                    <div><Icon path={mdiFacebook} size={1.3}></Icon></div>
                     <div><Icon path={mdiMapMarker} size={1.3}></Icon></div>
                     <div><Icon path={mdiPhone} size={1.3}></Icon></div>
                 </div>

@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import './Welcome.css'
 import artwork1 from '../assets/artwork1.png'
 import Icon from '@mdi/react';
-import { mdiInstagram, mdiMapMarker, mdiPhone } from '@mdi/js';
+import { mdiFacebook, mdiMapMarker, mdiPhone } from '@mdi/js';
 
 const Welcome = () => {
 
@@ -37,7 +37,7 @@ const Welcome = () => {
             <div className='contactCont'>
                 <span>CONTACT US</span>
                 <div id="socialCont">
-                    <div><Icon path={mdiInstagram} size={1.3}></Icon></div>
+                    <div><Icon path={mdiFacebook} size={1.3}></Icon></div>
                     <div><Icon path={mdiMapMarker} size={1.3}></Icon></div>
                     <div><Icon path={mdiPhone} size={1.3}></Icon></div>
                 </div>
