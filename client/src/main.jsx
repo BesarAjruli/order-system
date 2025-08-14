@@ -7,7 +7,6 @@ import Orders from './components/Orders.jsx'
 import Gallery from './components/Gallery.jsx'
 import AboutUs from './components/AboutUs.jsx'
 import './App.css'
-import './index.css'
 
 const router = createBrowserRouter([
   {

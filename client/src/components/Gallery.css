@@ -1,0 +1,119 @@
+.gallery-container {
+  min-height: 100vh;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 0 0.5rem;
+}
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0 1rem;
+  margin-top: 1.25rem;
+  position: relative;
+  z-index: 20;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(17, 17, 17, 0.5);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+
+.category-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.category-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.category-btn.active {
+  background: white;
+  color: black;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.slideshow {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.slideshow-image {
+  position: absolute;
+  max-height: 90vh;
+  max-width: 70vw;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: all 0.7s ease-in-out;
+}
+
+.slideshow-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  border-radius: 0.5rem;
+}
+
+.progress-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 20;
+}
+
+.progress-svg {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  transform: rotate(-90deg);
+}
+
+.progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.image-counter {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+}
+
+.image-counter span {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+}
